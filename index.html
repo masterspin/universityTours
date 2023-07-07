@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="icon" href="relicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav class="sticky top-0 w-full py-3 pb-3 bg-black shadow-2xl mb-4">
+        <div class="">
+            <div class="flex flex-row py-1 justify-center items-center">
+                <div class="pl-3 justify-center items-center">
+                    <a href=""><img src="logo.png" width="200"></img></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    th{ 
+        cursor: pointer;
+        color:#fff;
+            }
+</style>
+
+<div class="pr-[22%] pl-[22%]">
+    <table class="table table-striped">
+        <tr  class="bg-blue-600">
+            <th  class="bg-blue-900" data-colname="name" data-order="desc">Name &#9650</th>
+        </tr>
+        <tbody id="myTable">
+            
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+var myArray = [
+    {'name':'Michigan State University', 'state':'Michigan', 'url':'https://msutours.web.app/'},
+    {'name':'University of Michigan', 'state':'Michigan', 'url':'https://mtours-46bd2.web.app/'},
+]
+
+
+buildTable(myArray)
+
+
+
+ $('th').on('click', function(){
+     var column = $(this).data('colname')
+     var order = $(this).data('order')
+     var text = $(this).html()
+     text = text.substring(0, text.length - 1);
+     
+     
+     
+     if (order == 'desc'){
+        myArray = myArray.sort((a, b) => a[column] < b[column] ? 1 : -1)
+        $(this).data("order","asc");
+        text += '&#9660'
+     }else{
+        myArray = myArray.sort((a, b) => a[column] > b[column] ? 1 : -1)
+        $(this).data("order","desc");
+        text += '&#9650'
+     }
+
+    $(this).html(text)
+    buildTable(myArray)
+    })
+
+
+   
+ 
+    
+function buildTable(data){
+    var table = document.getElementById('myTable')
+    table.innerHTML = ''
+    for (var i = 0; i < data.length; i++){
+        var colname = `name-${i}`
+        var colage = `age-${i}`
+        var colbirth = `birth-${i}`
+
+        var row = `<div class="">
+                    <a href = "${data[i].url}" target = "_blank" style = "text-decoration:none">
+                    <div class="bg-gray-100 mx-auto border-gray-500 border rounded-sm text-gray-700 mb-0.5 h-30">
+                    <div class="flex p-3 border-l-8 border-green-900">
+                        <div class="flex-1">
+                            <div class="ml-3 space-y-1 pr-3">
+                                <div class="text-base leading-6 font-normal font-semibold">${data[i].name}</div>
+                                <div class="text-sm leading-5 pt-4"><span class="text-xs leading-4 font-normal text-gray-500"></span>${data[i].state}</div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </Link >
+                    </div>`
+        table.innerHTML += row
+    }
+}
+
+</script>
+</body>
+
+<footer class="fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-100 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023. All Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/in/rjutur/" class="mr-4 hover:underline md:mr-6">Ritij Jutur</a>
+        </li>
+    </ul>
+</footer>
+
+</html>
